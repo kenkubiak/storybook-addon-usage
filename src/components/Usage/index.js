@@ -1,18 +1,20 @@
 import React, {Component, PropTypes} from "react";
 import style from "./style";
+import Prism from 'prismjs';
+import languages from 'prism-languages';
+import 'prismjs/themes/prism.css';
 
 export default class Usage extends Component {
 
   render() {
     let {storySource} = this.props;
-    return (<div style={style.wrapper}>
-      {storySource.split('\n').map(function (item, idx) {
-        const tab = idx > 0 ? style.tab : null;
-        return (
-          <span style={tab} key={idx}>
-            {item} <br/>
-          </span>
-        )
-      })}</div>)
+    let html = Prism.highlight(storySource, languages.jsx);
+    return (
+        <pre style={style.wrapper}>
+            <code className="language-jsx"
+                dangerouslySetInnerHTML={{__html: html}}>
+            </code>
+        </pre>
+    );
   }
 }

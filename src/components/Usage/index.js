@@ -6,6 +6,10 @@ import 'prismjs/themes/prism.css';
 
 export default class Usage extends Component {
 
+  shouldComponentUpdate (nextProps) {
+      return nextProps.storySource !== this.props.storySource;
+  }
+
   render() {
     let {storySource} = this.props;
     let html = Prism.highlight(storySource, languages.jsx);
